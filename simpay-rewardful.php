@@ -45,6 +45,7 @@ if ( ! class_exists( 'Simpay_Rewardful' ) ) {
 				add_filter( 'script_loader_tag', array( self::$instance, 'replace_script_tag' ), 10, 2 );
 
 				add_filter( 'simpay_more_form_attributes', array( self::$instance, 'add_form_tag_data_attr' ) );
+				add_filter( 'simpay_stripe_customer_args', array( self::$instance, 'add_referral_metadata' ) );
 			}
 
 			return self::$instance;
@@ -71,8 +72,20 @@ if ( ! class_exists( 'Simpay_Rewardful' ) ) {
 		 * Add Rewardful data attribute to payment form tag.
 		 */
 		public function add_form_tag_data_attr() {
-
 			return 'data-rewardful';
+		}
+
+		/**
+		 * TODO Add referral data to Stripe customer metadata.
+		 */
+		public function add_referral_metadata( $args ) {
+			$addl_params = array(
+				'metadata' => array(
+					'referral' => 'REWARDFUL REFERRAL DATA',
+				),
+			);
+
+			return array_merge( $addl_params, $args );
 		}
 	}
 
