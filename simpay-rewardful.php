@@ -81,7 +81,7 @@ if ( ! class_exists( 'Simpay_Rewardful' ) ) {
 		public function add_referral_metadata( $args ) {
 			$addl_params = array(
 				'metadata' => array(
-					'referral' => 'REWARDFUL REFERRAL DATA',
+					'referral' => $_POST['referral'],
 				),
 			);
 
